@@ -21,6 +21,12 @@ const meta = {
   args: {
     children: "Button",
   },
+  parameters: {
+    design: {
+      type: "figma",
+      url: "https://www.figma.com/design/wVzc4wbNrfKR9awe8UU401/DS---Buttons?node-id=0-1",
+    },
+  },
 } satisfies Meta<typeof Button>;
 
 export default meta;
