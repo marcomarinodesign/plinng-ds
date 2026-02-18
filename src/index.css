@@ -11,6 +11,13 @@
   --color-tertiary-border: #000000;
   --color-disabled: #b4b290;
 
+  --color-link-secondary: #B4B290;
+  --color-link-secondary-disabled: #D8D8D8;
+  --color-link-tertiary: #D0CFB8;
+  --color-link-tertiary-disabled: #C3C3C3;
+  --color-link-primary-alt: #FFFFFF;
+  --color-link-primary-alt-disabled: #949494;
+
   --font-sans: "Inter", sans-serif;
 }
 
