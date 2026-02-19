@@ -6,3 +6,5 @@ export { Input } from "./components/Input";
 export type { InputProps } from "./components/Input";
 export { Badge } from "./components/Badge";
 export type { BadgeProps } from "./components/Badge";
+export { Text } from "./components/Text";
+export type { TextProps, TextVariant } from "./components/Text";
