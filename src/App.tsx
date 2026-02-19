@@ -1,6 +1,7 @@
 import { Button } from "./components/Button";
 import { LinkWeb } from "./components/LinkWeb";
 import { Input } from "./components/Input";
+import { Badge } from "./components/Badge";
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -32,6 +33,22 @@ function App() {
           <LinkWeb href="#" variant="secondary">Secondary</LinkWeb>
           <LinkWeb href="#" variant="tertiary">Tertiary</LinkWeb>
           <LinkWeb href="#" aria-disabled="true">Disabled</LinkWeb>
+        </div>
+      </Section>
+
+      <Section title="Badge">
+        <div className="flex gap-2 items-center flex-wrap">
+          <Badge variant="default">Default</Badge>
+          <Badge variant="success">Success</Badge>
+          <Badge variant="warning">Warning</Badge>
+          <Badge variant="error">Error</Badge>
+          <Badge variant="info">Info</Badge>
+        </div>
+        <div className="flex gap-2 items-center flex-wrap">
+          <Badge variant="default" dot>Default</Badge>
+          <Badge variant="success" dot>Active</Badge>
+          <Badge variant="error" dot>Critical</Badge>
+          <Badge variant="warning" size="sm">Small</Badge>
         </div>
       </Section>
 
