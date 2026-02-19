@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Button } from "./components/Button";
 import { LinkWeb } from "./components/LinkWeb";
 import { Input } from "./components/Input";
@@ -22,9 +23,42 @@ const NAV = [
   },
 ];
 
+// ─── Active section hook ──────────────────────────────────────────────────────
+
+const ALL_IDS = NAV.flatMap(({ items }) => items.map(({ href }) => href.slice(1)));
+
+function useActiveSection() {
+  const [active, setActive] = useState<string>(ALL_IDS[0]);
+
+  useEffect(() => {
+    const observers: IntersectionObserver[] = [];
+
+    ALL_IDS.forEach((id) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) setActive(id);
+        },
+        { rootMargin: "-30% 0px -60% 0px", threshold: 0 },
+      );
+
+      observer.observe(el);
+      observers.push(observer);
+    });
+
+    return () => observers.forEach((o) => o.disconnect());
+  }, []);
+
+  return active;
+}
+
 // ─── Layout primitives ───────────────────────────────────────────────────────
 
 function Sidebar() {
+  const active = useActiveSection();
+
   return (
     <aside
       aria-label="Design system navigation"
@@ -42,16 +76,25 @@ function Sidebar() {
           <div key={group}>
             <Text variant="overline" as="p" className="text-white/30 px-3 mb-1">{group}</Text>
             <ul role="list" className="flex flex-col gap-0.5">
-              {items.map(({ label, href }) => (
-                <li key={href}>
-                  <a
-                    href={href}
-                    className="flex items-center px-3 py-1.5 rounded-lg text-sm font-medium text-white/60 hover:text-white hover:bg-white/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
-                  >
-                    {label}
-                  </a>
-                </li>
-              ))}
+              {items.map(({ label, href }) => {
+                const id = href.slice(1);
+                const isActive = active === id;
+                return (
+                  <li key={href}>
+                    <a
+                      href={href}
+                      aria-current={isActive ? "true" : undefined}
+                      className={`flex items-center px-3 py-1.5 rounded-lg text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 ${
+                        isActive
+                          ? "bg-secondary text-secondary-text"
+                          : "text-white/60 hover:text-white hover:bg-white/10"
+                      }`}
+                    >
+                      {label}
+                    </a>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         ))}
