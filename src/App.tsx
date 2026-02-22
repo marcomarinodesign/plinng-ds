@@ -56,50 +56,77 @@ function useActiveSection() {
 
 // ─── Layout primitives ───────────────────────────────────────────────────────
 
-function Sidebar() {
+function Sidebar({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   const active = useActiveSection();
 
   return (
-    <aside
-      aria-label="Design system navigation"
-      className="fixed top-0 left-0 h-screen w-60 flex flex-col bg-primary overflow-y-auto z-10"
-    >
-      {/* Brand */}
-      <div className="px-6 py-5 border-b border-white/10">
-        <Text variant="heading-4" as="span" className="text-primary-text">Plinng</Text>
-        <Text variant="caption" as="p" className="text-white/40 mt-0.5">Design System v0.1</Text>
-      </div>
+    <>
+      {/* Mobile overlay */}
+      {isOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-20 md:hidden"
+          onClick={onClose}
+          aria-hidden="true"
+        />
+      )}
 
-      {/* Navigation */}
-      <nav aria-label="Design system sections" className="flex-1 px-3 py-4 flex flex-col gap-5">
-        {NAV.map(({ group, items }) => (
-          <div key={group}>
-            <Text variant="overline" as="p" className="text-white/30 px-3 mb-1">{group}</Text>
-            <ul role="list" className="flex flex-col gap-0.5">
-              {items.map(({ label, href }) => {
-                const id = href.slice(1);
-                const isActive = active === id;
-                return (
-                  <li key={href}>
-                    <a
-                      href={href}
-                      aria-current={isActive ? "true" : undefined}
-                      className={`flex items-center px-3 py-1.5 rounded-lg text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 ${
-                        isActive
-                          ? "bg-secondary text-secondary-text"
-                          : "text-white/60 hover:text-white hover:bg-white/10"
-                      }`}
-                    >
-                      {label}
-                    </a>
-                  </li>
-                );
-              })}
-            </ul>
+      <aside
+        id="sidebar-nav"
+        aria-label="Design system navigation"
+        className={`fixed top-0 left-0 h-screen w-60 flex flex-col bg-primary overflow-y-auto z-30 transition-transform duration-300 md:translate-x-0 ${
+          isOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
+      >
+        {/* Brand */}
+        <div className="px-6 py-5 border-b border-white/10 flex items-center justify-between">
+          <div>
+            <Text variant="heading-4" as="span" className="text-primary-text">Plinng</Text>
+            <Text variant="caption" as="p" className="text-white/40 mt-0.5">Design System v0.1</Text>
           </div>
-        ))}
-      </nav>
-    </aside>
+          {/* Close button — mobile only */}
+          <button
+            onClick={onClose}
+            className="md:hidden flex items-center justify-center w-8 h-8 text-white/60 hover:text-white rounded-lg hover:bg-white/10 transition-colors"
+            aria-label="Close navigation"
+          >
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 4L4 12M4 4L12 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+            </svg>
+          </button>
+        </div>
+
+        {/* Navigation */}
+        <nav aria-label="Design system sections" className="flex-1 px-3 py-4 flex flex-col gap-5">
+          {NAV.map(({ group, items }) => (
+            <div key={group}>
+              <Text variant="overline" as="p" className="text-white/30 px-3 mb-1">{group}</Text>
+              <ul role="list" className="flex flex-col gap-0.5">
+                {items.map(({ label, href }) => {
+                  const id = href.slice(1);
+                  const isActive = active === id;
+                  return (
+                    <li key={href}>
+                      <a
+                        href={href}
+                        onClick={onClose}
+                        aria-current={isActive ? "true" : undefined}
+                        className={`flex items-center px-3 py-1.5 rounded-lg text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 ${
+                          isActive
+                            ? "bg-secondary text-secondary-text"
+                            : "text-white/60 hover:text-white hover:bg-white/10"
+                        }`}
+                      >
+                        {label}
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          ))}
+        </nav>
+      </aside>
+    </>
   );
 }
 
@@ -135,7 +162,7 @@ function SubSection({ label, children }: { label: string; children: React.ReactN
   return (
     <div className="flex flex-col gap-2">
       <Text variant="overline" as="p" className="text-disabled">{label}</Text>
-      <div className="rounded-xl border border-tertiary-border bg-white p-6 flex flex-wrap gap-4 items-start">
+      <div className="rounded-xl border border-tertiary-border bg-white p-4 sm:p-6 flex flex-wrap gap-4 items-start">
         {children}
       </div>
     </div>
@@ -159,6 +186,8 @@ const TYPE_SCALE: { variant: TextVariant; spec: string; sample: string }[] = [
 ];
 
 function App() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   return (
     <>
       {/* Skip to main content — accessibility */}
@@ -170,14 +199,31 @@ function App() {
       </a>
 
       <div className="min-h-screen flex bg-gray-50">
-        <Sidebar />
+        <Sidebar isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} />
 
         <main
           id="main-content"
           tabIndex={-1}
-          className="ml-60 flex-1 focus-visible:outline-none"
+          className="w-full md:ml-60 flex-1 focus-visible:outline-none"
         >
-          <div className="max-w-3xl px-12 py-12 flex flex-col gap-16">
+          {/* Mobile header */}
+          <div className="md:hidden sticky top-0 z-10 bg-primary flex items-center gap-3 px-4 py-4 border-b border-white/10">
+            <button
+              onClick={() => setIsMobileMenuOpen(true)}
+              className="flex items-center justify-center w-8 h-8 text-primary-text rounded-lg hover:bg-white/10 transition-colors"
+              aria-label="Open navigation"
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="sidebar-nav"
+            >
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2 4.5H16M2 9H16M2 13.5H16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+              </svg>
+            </button>
+            <Text variant="heading-4" as="span" className="text-primary-text">Plinng</Text>
+            <Text variant="caption" as="span" className="text-white/40">Design System v0.1</Text>
+          </div>
+
+          <div className="max-w-3xl px-4 sm:px-8 md:px-12 py-8 md:py-12 flex flex-col gap-12 md:gap-16">
 
             {/* Hero */}
             <header>
@@ -202,10 +248,10 @@ function App() {
                   <div
                     key={variant}
                     role="row"
-                    className={`flex items-baseline justify-between gap-6 px-6 py-4 ${i < TYPE_SCALE.length - 1 ? "border-b border-tertiary-border" : ""}`}
+                    className={`flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 sm:gap-6 px-4 sm:px-6 py-4 ${i < TYPE_SCALE.length - 1 ? "border-b border-tertiary-border" : ""}`}
                   >
                     <Text role="cell" variant={variant}>{sample}</Text>
-                    <Text role="cell" variant="caption" as="span" className="text-disabled shrink-0 tabular-nums">
+                    <Text role="cell" variant="caption" as="span" className="text-disabled sm:shrink-0 tabular-nums">
                       {spec}
                     </Text>
                   </div>
