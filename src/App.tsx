@@ -4,6 +4,7 @@ import { LinkWeb } from "./components/LinkWeb";
 import { Input } from "./components/Input";
 import { Badge } from "./components/Badge";
 import { Text, type TextVariant } from "./components/Text";
+import { Icon, type IconName } from "./components/Icon";
 
 // ─── Icons ───────────────────────────────────────────────────────────────────
 
@@ -32,6 +33,7 @@ const NAV = [
       { label: "Border",          href: "#border"          },
       { label: "Shadows",         href: "#shadows"         },
       { label: "Sizing & Layout", href: "#sizing-layout"   },
+      { label: "Iconography",     href: "#iconography"     },
     ],
   },
   {
@@ -172,6 +174,165 @@ const GRID_COLUMNS = [
   { cols: 4,  note: "Mobile" },
   { cols: 8,  note: "Tablet" },
   { cols: 12, note: "Desktop" },
+];
+
+// ─── Icon names ──────────────────────────────────────────────────────────────
+
+const ICON_NAMES: IconName[] = [
+  "accessibility","activity","air-vent","airplay","alarm-check","alarm-clock",
+  "alarm-clock-off","alarm-minus","alarm-plus","album","alert-circle",
+  "alert-octagon","alert-triangle","align-center","align-center-horizontal",
+  "align-center-vertical","align-end-horizontal","align-end-vertical",
+  "align-horizontal-distribute-center","align-horizontal-distribute-end",
+  "align-horizontal-distribute-start","align-horizontal-justify-center",
+  "align-horizontal-justify-end","align-horizontal-justify-start",
+  "align-horizontal-space-around","align-horizontal-space-between",
+  "align-justify","align-left","align-right","align-start-horizontal",
+  "align-start-vertical","align-vertical-distribute-center",
+  "align-vertical-distribute-end","align-vertical-distribute-start",
+  "align-vertical-justify-center","align-vertical-justify-end",
+  "align-vertical-justify-start","align-vertical-space-around",
+  "align-vertical-space-between","anchor","angry","annoyed","aperture",
+  "apple","archive","archive-restore","armchair","arrow-big-down",
+  "arrow-big-left","arrow-big-right","arrow-big-up","arrow-down",
+  "arrow-down-circle","arrow-down-left","arrow-down-right","arrow-left",
+  "arrow-left-circle","arrow-left-right","arrow-right","arrow-right-circle",
+  "arrow-up","arrow-up-circle","arrow-up-down","arrow-up-left","arrow-up-right",
+  "asterisk","at-sign","award","axe","axis-3d","baby","backpack",
+  "baggage-claim","banana","banknote","bar-chart","bar-chart-2","bar-chart-3",
+  "bar-chart-4","bar-chart-horizontal","baseline","bath","battery",
+  "battery-charging","battery-full","battery-low","battery-medium",
+  "battery-warning","beaker","bean","bean-off","bed","bed-double","bed-single",
+  "beef","beer","bell","bell-minus","bell-off","bell-plus","bell-ring","bike",
+  "binary","bitcoin","bluetooth","bluetooth-connected","bluetooth-off",
+  "bluetooth-searching","bold","bomb","bone","book","book-open",
+  "book-open-check","bookmark","bookmark-minus","bookmark-plus","bot","box",
+  "box-select","boxes","briefcase","brush","bug","building","building-2","bus",
+  "cake","calculator","calendar","calendar-check","calendar-check-2",
+  "calendar-clock","calendar-days","calendar-heart","calendar-minus",
+  "calendar-off","calendar-plus","calendar-range","calendar-search",
+  "calendar-x","calendar-x-2","camera","camera-off","candy","candy-off","car",
+  "carrot","cast","cat","check","check-check","check-circle","check-circle-2",
+  "check-square","chef-hat","cherry","chevron-down","chevron-first",
+  "chevron-last","chevron-left","chevron-right","chevron-up","chevrons-down",
+  "chevrons-down-up","chevrons-left","chevrons-left-right","chevrons-right",
+  "chevrons-right-left","chevrons-up","chevrons-up-down","chrome","cigarette",
+  "cigarette-off","circle","circle-dot","circle-ellipsis","circle-slashed",
+  "citrus","clapperboard","clipboard","clipboard-check","clipboard-copy",
+  "clipboard-edit","clipboard-list","clipboard-signature","clipboard-type",
+  "clipboard-x","clock","clock-1","clock-10","clock-11","clock-12","clock-2",
+  "clock-3","clock-4","clock-5","clock-6","clock-7","clock-8","clock-9",
+  "cloud","cloud-cog","cloud-drizzle","cloud-fog","cloud-hail",
+  "cloud-lightning","cloud-moon","cloud-moon-rain","cloud-off","cloud-rain",
+  "cloud-rain-wind","cloud-snow","cloud-sun","cloud-sun-rain","cloudy","clover",
+  "code","code-2","codepen","codesandbox","coffee","cog","coins","columns",
+  "command","compass","component","concierge-bell","contact","contrast",
+  "cookie","copy","copyleft","copyright","corner-down-left","corner-down-right",
+  "corner-left-down","corner-left-up","corner-right-down","corner-right-up",
+  "corner-up-left","corner-up-right","cpu","credit-card","croissant","crop",
+  "cross","crosshair","crown","cup-soda","curly-braces","currency","database",
+  "database-backup","delete","diamond","dice-1","dice-2","dice-3","dice-4",
+  "dice-5","dice-6","dices","diff","disc","divide","divide-circle",
+  "divide-square","dna","dna-off","dog","dollar-sign","download",
+  "download-cloud","dribbble","droplet","droplets","drumstick","dumbbell","ear",
+  "ear-off","edit","edit-2","edit-3","egg","egg-fried","egg-off","equal",
+  "equal-not","eraser","euro","expand","external-link","eye","eye-off",
+  "facebook","factory","fan","fast-forward","feather","figma","file",
+  "file-archive","file-audio","file-audio-2","file-axis-3d","file-badge",
+  "file-badge-2","file-bar-chart","file-bar-chart-2","file-box","file-check",
+  "file-check-2","file-clock","file-code","file-cog","file-cog-2","file-diff",
+  "file-digit","file-down","file-edit","file-heart","file-image","file-input",
+  "file-json","file-json-2","file-key","file-key-2","file-line-chart",
+  "file-lock","file-lock-2","file-minus","file-minus-2","file-output",
+  "file-pie-chart","file-plus","file-plus-2","file-question","file-scan",
+  "file-search","file-search-2","file-signature","file-spreadsheet",
+  "file-symlink","file-terminal","file-text","file-type","file-type-2",
+  "file-up","file-video","file-video-2","file-volume","file-volume-2",
+  "file-warning","file-x","file-x-2","files","film","filter","fingerprint",
+  "fish","flag","flag-off","flag-triangle-left","flag-triangle-right","flame",
+  "flashlight","flashlight-off","flask-conical","flask-conical-off",
+  "flask-round","flip-horizontal","flip-horizontal-2","flip-vertical",
+  "flip-vertical-2","flower","flower-2","focus","folder","folder-archive",
+  "folder-check","folder-clock","folder-closed","folder-cog","folder-cog-2",
+  "folder-down","folder-edit","folder-heart","folder-input","folder-key",
+  "folder-lock","folder-minus","folder-open","folder-output","folder-plus",
+  "folder-search","folder-search-2","folder-symlink","folder-tree","folder-up",
+  "folder-x","folders","form-input","forward","frame","framer","frown","fuel",
+  "function-square","gamepad","gamepad-2","gauge","gavel","gem","ghost","gift",
+  "git-branch","git-branch-plus","git-commit","git-compare","git-fork",
+  "git-merge","git-pull-request","git-pull-request-closed",
+  "git-pull-request-draft","github","gitlab","glass-water","glasses","globe",
+  "globe-2","grab","graduation-cap","grape","grid","grip-horizontal",
+  "grip-vertical","hammer","hand","hand-metal","hard-drive","hard-hat","hash",
+  "haze","heading","heading-1","heading-2","heading-3","heading-4","heading-5",
+  "heading-6","headphones","heart","heart-crack","heart-handshake","heart-off",
+  "heart-pulse","help-circle","hexagon","highlighter","history","home","hop",
+  "hop-off","hourglass","ice-cream","ice-cream-2","image","image-minus",
+  "image-off","image-plus","import","inbox","indent","indian-rupee","infinity",
+  "info","inspect","instagram","italic","japanese-yen","joystick","key",
+  "keyboard","lamp","lamp-ceiling","lamp-desk","lamp-floor","lamp-wall-down",
+  "lamp-wall-up","landmark","languages","laptop","laptop-2","lasso",
+  "lasso-select","laugh","layers","layout","layout-dashboard","layout-grid",
+  "layout-list","layout-template","leaf","library","life-buoy","lightbulb",
+  "lightbulb-off","line-chart","link","link-2","link-2-off","linkedin","list",
+  "list-checks","list-end","list-minus","list-music","list-ordered","list-plus",
+  "list-start","list-video","list-x","loader","loader-2","locate",
+  "locate-fixed","locate-off","lock","log-in","log-out","luggage","magnet",
+  "mail","mail-check","mail-minus","mail-open","mail-plus","mail-question",
+  "mail-search","mail-warning","mail-x","mails","map","map-pin","map-pin-off",
+  "martini","maximize","maximize-2","medal","megaphone","megaphone-off","meh",
+  "menu","message-circle","message-square","mic","mic-2","mic-off","microscope",
+  "microwave","milestone","milk","milk-off","minimize","minimize-2","minus",
+  "minus-circle","minus-square","monitor","monitor-off","monitor-smartphone",
+  "monitor-speaker","moon","more-horizontal","more-vertical","mountain",
+  "mountain-snow","mouse","mouse-pointer","mouse-pointer-2",
+  "mouse-pointer-click","move","move-3d","move-diagonal","move-diagonal-2",
+  "move-horizontal","move-vertical","music","music-2","music-3","music-4",
+  "navigation","navigation-2","navigation-2-off","navigation-off","network",
+  "newspaper","nut","nut-off","octagon","option","outdent","package","package-2",
+  "package-check","package-minus","package-open","package-plus",
+  "package-search","package-x","paint-bucket","paintbrush","paintbrush-2",
+  "palette","palmtree","paperclip","party-popper","pause","pause-circle",
+  "pause-octagon","pen-tool","pencil","percent","person-standing","phone",
+  "phone-call","phone-forwarded","phone-incoming","phone-missed","phone-off",
+  "phone-outgoing","pie-chart","piggy-bank","pilcrow","pin","pin-off","pipette",
+  "pizza","plane","play","play-circle","plug","plug-2","plug-zap","plus",
+  "plus-circle","plus-square","pocket","podcast","pointer","pound-sterling",
+  "power","power-off","printer","puzzle","qr-code","quote","radio",
+  "radio-receiver","rectangle-horizontal","rectangle-vertical","recycle","redo",
+  "redo-2","refresh-ccw","refresh-cw","refrigerator","regex","repeat","repeat-1",
+  "reply","reply-all","rewind","rocket","rocking-chair","rotate-3d","rotate-ccw",
+  "rotate-cw","rss","ruler","russian-ruble","sailboat","salad","sandwich","save",
+  "scale","scale-3d","scaling","scan","scan-face","scan-line","scissors",
+  "screen-share","screen-share-off","scroll","search","send",
+  "separator-horizontal","separator-vertical","server","server-cog",
+  "server-crash","server-off","settings","settings-2","share","share-2","sheet",
+  "shield","shield-alert","shield-check","shield-close","shield-off","shirt",
+  "shopping-bag","shopping-cart","shovel","shower-head","shrink","shrub",
+  "shuffle","sidebar","sidebar-close","sidebar-open","sigma","signal",
+  "signal-high","signal-low","signal-medium","signal-zero","siren","skip-back",
+  "skip-forward","skull","slack","slash","slice","sliders","sliders-horizontal",
+  "smartphone","smartphone-charging","smile","smile-plus","snowflake","sofa",
+  "sort-asc","sort-desc","soup","speaker","spline","sprout","square","star",
+  "star-half","star-off","stethoscope","sticker","sticky-note","stop-circle",
+  "stretch-horizontal","stretch-vertical","strikethrough","subscript",
+  "subtitles","sun","sun-dim","sun-medium","sun-moon","sun-snow","sunrise",
+  "sunset","superscript","swiss-franc","switch-camera","sword","swords",
+  "syringe","table","table-2","tablet","tag","tags","target","tent","terminal",
+  "terminal-square","text-cursor","text-cursor-input","thermometer",
+  "thermometer-snowflake","thermometer-sun","thumbs-down","thumbs-up","ticket",
+  "timer","timer-off","timer-reset","toggle-left","toggle-right","tornado",
+  "toy-brick","train","trash","trash-2","tree-deciduous","tree-pine","trees",
+  "trello","trending-down","trending-up","triangle","trophy","truck","tv","tv-2",
+  "twitch","twitter","type","umbrella","underline","undo","undo-2","unlink",
+  "unlink-2","unlock","upload","upload-cloud","usb","user","user-check",
+  "user-cog","user-minus","user-plus","user-x","users","utensils",
+  "utensils-crossed","vegan","venetian-mask","verified","vibrate","vibrate-off",
+  "video","video-off","view","voicemail","volume","volume-1","volume-2",
+  "volume-x","wallet","wand","wand-2","watch","waves","webcam","webhook",
+  "wheat","wheat-off","wifi","wifi-off","wind","wine","wine-off","wrap-text",
+  "wrench","x","x-circle","x-octagon","x-square","youtube","zap","zap-off",
+  "zoom-in","zoom-out",
 ];
 
 // ─── Active section hook ──────────────────────────────────────────────────────
@@ -317,6 +478,83 @@ function SubSection({ label, children }: { label: string; children: React.ReactN
         {children}
       </div>
     </div>
+  );
+}
+
+// ─── Iconography section ─────────────────────────────────────────────────────
+
+function IconographySection() {
+  const [query, setQuery] = useState("");
+  const filtered = query.trim()
+    ? ICON_NAMES.filter((n) => n.includes(query.trim().toLowerCase()))
+    : ICON_NAMES;
+
+  return (
+    <Section
+      id="iconography"
+      title="Iconography"
+      description={`${ICON_NAMES.length} icons from Lucide — consistent 24×24 stroke icons. Use the Icon component with the name prop.`}
+    >
+      <div className="flex flex-col gap-4">
+        {/* Search */}
+        <div className="relative">
+          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-black/30 pointer-events-none">
+            <Icon name="search" size={16} />
+          </span>
+          <input
+            type="search"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder={`Search ${ICON_NAMES.length} icons…`}
+            className="w-full pl-9 pr-4 py-2.5 text-sm border border-grey-soft rounded-lg bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20"
+            aria-label="Search icons"
+          />
+        </div>
+
+        {/* Count */}
+        {query.trim() && (
+          <Text variant="caption-lg" className="text-black/40">
+            {filtered.length} result{filtered.length !== 1 ? "s" : ""} for "{query.trim()}"
+          </Text>
+        )}
+
+        {/* Grid */}
+        {filtered.length > 0 ? (
+          <div className="grid grid-cols-[repeat(auto-fill,minmax(80px,1fr))] gap-1">
+            {filtered.map((name) => (
+              <button
+                key={name}
+                type="button"
+                title={name}
+                onClick={() => navigator.clipboard?.writeText(name).catch(() => {})}
+                className="flex flex-col items-center gap-1.5 p-2 rounded-lg hover:bg-white hover:shadow-sm transition-all cursor-pointer group"
+              >
+                <Icon name={name} size={20} className="text-black group-hover:text-black" />
+                <span className="text-[9px] text-black/40 font-mono text-center leading-tight line-clamp-2 w-full break-all">
+                  {name}
+                </span>
+              </button>
+            ))}
+          </div>
+        ) : (
+          <div className="flex flex-col items-center gap-2 py-12 text-black/30">
+            <Icon name="frown" size={32} />
+            <Text variant="body-sm">No icons match "{query.trim()}"</Text>
+          </div>
+        )}
+
+        {/* Usage note */}
+        <div className="rounded-lg bg-white shadow-sm p-4 border-l-2 border-secondary">
+          <Text variant="caption-lg" bold className="mb-1 block">Usage</Text>
+          <code className="text-[12px] font-mono text-black/60 block">
+            {'<Icon name="arrow-right" size={24} />'}
+          </code>
+          <Text variant="caption-sm" className="text-black/40 mt-1.5 block">
+            Click any icon to copy its name to clipboard.
+          </Text>
+        </div>
+      </div>
+    </Section>
   );
 }
 
@@ -696,6 +934,9 @@ function App() {
                 <Input size="sm" label="Small"  iconRight={<IconArrowRight />} placeholder="Placeholder..." />
               </SubSection>
             </Section>
+
+            {/* ── Iconography ── */}
+            <IconographySection />
 
             {/* ── LinkWeb ── */}
             <Section
