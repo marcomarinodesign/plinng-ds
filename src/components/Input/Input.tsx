@@ -35,6 +35,9 @@ export function Input({
   const autoId = useId();
   const id = idProp ?? autoId;
   const hasError = Boolean(error);
+  const hintId = `${id}-hint`;
+  const errorId = `${id}-error`;
+  const describedById = error ? errorId : hint ? hintId : undefined;
 
   return (
     <div className={clsx("flex flex-col gap-1.5", block ? "w-full" : "w-fit")}>
@@ -47,6 +50,9 @@ export function Input({
           )}
         >
           {label}
+          {rest.required && (
+            <span aria-hidden="true" className="text-red-500 ml-0.5">*</span>
+          )}
         </label>
       )}
 
@@ -60,19 +66,21 @@ export function Input({
         <input
           id={id}
           disabled={disabled}
+          aria-invalid={hasError || undefined}
+          aria-describedby={describedById}
           className={twMerge(
             clsx(
-              "rounded-lg border font-sans bg-white text-primary placeholder:text-disabled outline-none transition-colors",
-              "focus:ring-2 focus:ring-primary/20 focus:border-primary",
+              "rounded-lg border font-sans bg-white text-primary placeholder:text-disabled/50 outline-none transition-colors",
+              "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-0 focus-visible:outline-black focus-visible:border-transparent",
               sizeClasses[size],
               block ? "w-full" : "w-auto",
               iconLeft && "pl-10",
               iconRight && "pr-10",
               hasError
-                ? "border-red-500 focus:ring-red-500/20 focus:border-red-500"
+                ? "border-red-500 focus-visible:outline-red-500"
                 : "border-tertiary-border",
               disabled &&
-                "border-disabled text-disabled bg-gray-50 cursor-not-allowed placeholder:text-disabled",
+                "border-disabled/30 text-disabled/50 bg-gray-50 cursor-not-allowed placeholder:text-disabled/30",
               className,
             ),
           )}
@@ -88,9 +96,10 @@ export function Input({
 
       {(error || hint) && (
         <p
+          id={error ? errorId : hintId}
           className={clsx(
             "text-xs leading-none",
-            hasError ? "text-red-500" : "text-disabled",
+            hasError ? "text-red-500" : "text-disabled/60",
           )}
         >
           {error ?? hint}

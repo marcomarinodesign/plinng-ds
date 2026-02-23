@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap");
 @import "tailwindcss";
 
 @theme {
@@ -8,17 +8,100 @@
   --color-secondary-text: #000000;
   --color-tertiary: #ffffff;
   --color-tertiary-text: #000000;
-  --color-tertiary-border: #000000;
-  --color-disabled: #b4b290;
+  --color-tertiary-border: #EBEBEB;
+  --color-disabled: #000000;
 
-  --color-link-secondary: #B4B290;
-  --color-link-secondary-disabled: #D8D8D8;
-  --color-link-tertiary: #D0CFB8;
-  --color-link-tertiary-disabled: #C3C3C3;
+  --color-link-secondary: #000000;
+  --color-link-secondary-disabled: #9e9c8a;
+  --color-link-tertiary: #5a5944;
+  --color-link-tertiary-disabled: #9e9c8a;
   --color-link-primary-alt: #FFFFFF;
   --color-link-primary-alt-disabled: #949494;
 
   --font-sans: "Inter", sans-serif;
+
+  /* ── Spacing — 4px base grid ── */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+
+  /* ── Border radius ── */
+  --radius-none: 0px;
+  --radius-xs:   2px;
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   12px;
+  --radius-xl:   16px;
+  --radius-2xl:  24px;
+  --radius-full: 9999px;
+
+  /* ── Border width ── */
+  --border-width-1: 1px;
+  --border-width-2: 2px;
+  --border-width-4: 4px;
+
+  /* ── Shadow / Elevation ── */
+  --shadow-sm: 0 1px 2px 0 rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.10), 0 2px 4px -2px rgba(0,0,0,0.10);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.10), 0 4px 6px -4px rgba(0,0,0,0.10);
+  --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.10), 0 8px 10px -6px rgba(0,0,0,0.10);
+
+  /* ── Breakpoints ── */
+  --breakpoint-sm:  640px;
+  --breakpoint-md:  768px;
+  --breakpoint-lg:  1024px;
+  --breakpoint-xl:  1280px;
+  --breakpoint-2xl: 1536px;
+
+  /* ── Container max-widths ── */
+  --container-sm:  640px;
+  --container-md:  768px;
+  --container-lg:  1024px;
+  --container-xl:  1280px;
+  --container-2xl: 1536px;
+
+  /* ── Foundation palette (from Figma color styles) ── */
+
+  /* Accent */
+  --color-accent-100: #EEFFC7;
+  --color-accent-200: #DBFF95;
+  --color-accent-300: #BEFF50;
+  --color-accent-500: #86DD05;
+  --color-accent-700: #4D8605;
+
+  /* Basics */
+  --color-basics-black:          #000000;
+  --color-basics-white:          #FFFFFF;
+  --color-basics-text-secondary: #95958F;
+
+  /* Beige */
+  --color-beige-25:  #FBFBF7;
+  --color-beige-50:  #F5F5EB;
+  --color-beige-100: #DCDCCB;
+  --color-beige-200: #D0CFB8;
+  --color-beige-300: #B4B290;
+
+  /* Grey */
+  --color-grey-soft:        #EBEBEB;
+  --color-grey-soft-middle: #D8D8D8;
+  --color-grey-middle:      #C3C3C3;
+  --color-grey-dark:        #949494;
+
+  /* Status */
+  --color-error-1:   #DC2625;
+  --color-error-2:   #FECACA;
+  --color-error-3:   #FFE0E0;
+  --color-warning-1: #E89E1B;
+  --color-warning-2: #FFEBC6;
 }
 
 *,
@@ -38,8 +121,21 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Global focus indicator — WCAG 2.4.7 / 2.4.11 */
+:focus-visible {
+  outline: 2px solid #000000;
+  outline-offset: 2px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

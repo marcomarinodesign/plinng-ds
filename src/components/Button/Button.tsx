@@ -69,6 +69,7 @@ export function Button({
   children,
   disabled,
   className,
+  "aria-label": ariaLabel,
   ...rest
 }: ButtonProps) {
   const isDisabled = disabled || loading;
@@ -78,6 +79,7 @@ export function Button({
       className={twMerge(
         clsx(
           "inline-flex items-center justify-center gap-2 rounded-full font-semibold transition-colors cursor-pointer",
+          "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black",
           sizeClasses[size],
           variantClasses[variant],
           block && "w-full",
@@ -85,6 +87,8 @@ export function Button({
         ),
       )}
       disabled={isDisabled}
+      aria-busy={loading || undefined}
+      aria-label={loading ? (ariaLabel ?? "Loading…") : ariaLabel}
       {...rest}
     >
       {loading ? (

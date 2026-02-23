@@ -1,4 +1,4 @@
-import { type AnchorHTMLAttributes } from "react";
+import { type AnchorHTMLAttributes, type MouseEvent } from "react";
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -18,7 +18,6 @@ const sizeClasses = {
 function getVariantClasses(
   variant: "primary" | "secondary" | "tertiary",
   option: "default" | "alternative",
-  size: "lg" | "md",
 ) {
   if (variant === "primary" && option === "alternative") {
     return clsx(
@@ -29,8 +28,7 @@ function getVariantClasses(
 
   if (variant === "primary") {
     return clsx(
-      "text-black",
-      size === "md" && "underline",
+      "text-black underline",
       "aria-disabled:text-black aria-disabled:cursor-not-allowed aria-disabled:pointer-events-none",
     );
   }
@@ -57,18 +55,32 @@ export function LinkWeb({
   iconRight,
   children,
   className,
+  onClick,
   ...rest
 }: LinkWebProps) {
+  const isDisabled =
+    rest["aria-disabled"] === true || rest["aria-disabled"] === "true";
+
+  const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
+    if (isDisabled) {
+      e.preventDefault();
+      return;
+    }
+    onClick?.(e);
+  };
+
   return (
     <a
       className={twMerge(
         clsx(
           "inline-flex items-center justify-center gap-2 rounded-sm font-semibold text-base leading-[22px] transition-colors cursor-pointer",
+          "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black",
           sizeClasses[size],
-          getVariantClasses(variant, option, size),
+          getVariantClasses(variant, option),
           className,
         ),
       )}
+      onClick={handleClick}
       {...rest}
     >
       {iconLeft && <span className="inline-flex shrink-0">{iconLeft}</span>}
