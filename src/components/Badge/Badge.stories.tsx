@@ -19,6 +19,12 @@ const meta = {
   args: {
     children: "Badge",
   },
+  parameters: {
+    design: {
+      type: "figma",
+      url: "https://www.figma.com/design/wVzc4wbNrfKR9awe8UU401/Design-System?node-id=189-16355",
+    },
+  },
 } satisfies Meta<typeof Badge>;
 
 export default meta;
@@ -27,7 +33,11 @@ type Story = StoryObj<typeof meta>;
 // --- Variants ---
 
 export const Default: Story = {
-  args: { variant: "default" },
+  args: {
+    variant: "default",
+    size: "md",
+    dot: true
+  },
 };
 
 export const Success: Story = {

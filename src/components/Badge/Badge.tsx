@@ -8,25 +8,30 @@ export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
   dot?: boolean;
 }
 
+/**
+ * Badge variants aligned with Figma Design System.
+ * Uses DS tokens: beige-50, accent-100/700, warning-1/2, error-1/3, info-1/2.
+ */
 const variantClasses = {
-  default: "bg-gray-100 text-gray-700",
-  success: "bg-green-100 text-green-700",
-  warning: "bg-yellow-100 text-yellow-800",
-  error:   "bg-red-100 text-red-700",
-  info:    "bg-blue-100 text-blue-700",
+  default: "bg-beige-50 text-black",
+  success: "bg-accent-100 text-accent-700",
+  warning: "bg-warning-2 text-warning-1",
+  error: "bg-error-3 text-error-1",
+  info: "bg-info-2 text-info-1",
 } as const;
 
 const dotVariantClasses = {
-  default: "bg-gray-500",
-  success: "bg-green-500",
-  warning: "bg-yellow-500",
-  error: "bg-red-500",
-  info: "bg-blue-500",
+  default: "bg-black",
+  success: "bg-accent-700",
+  warning: "bg-warning-1",
+  error: "bg-error-1",
+  info: "bg-info-1",
 } as const;
 
+/** Figma: Default px-10 py-4 / Small px-8 py-2. Typography: Caption Large bold (12px) / Small bold (11px). */
 const sizeClasses = {
-  md: "px-2.5 py-1 text-xs",
-  sm: "px-2 py-0.5 text-[11px]",
+  md: "px-2.5 py-1 text-xs font-bold leading-4",
+  sm: "px-2 py-0.5 text-[11px] font-bold leading-4",
 } as const;
 
 export function Badge({
@@ -41,7 +46,7 @@ export function Badge({
     <span
       className={twMerge(
         clsx(
-          "inline-flex items-center gap-1.5 rounded-full font-semibold leading-none",
+          "inline-flex items-center gap-1 rounded-full",
           sizeClasses[size],
           variantClasses[variant],
           className,
@@ -51,7 +56,11 @@ export function Badge({
     >
       {dot && (
         <span
-          className={clsx("rounded-full shrink-0", dotVariantClasses[variant], size === "md" ? "w-1.5 h-1.5" : "w-1 h-1")}
+          className={clsx(
+            "rounded-full shrink-0",
+            dotVariantClasses[variant],
+            size === "md" ? "size-1.5" : "size-1",
+          )}
         />
       )}
       {children}

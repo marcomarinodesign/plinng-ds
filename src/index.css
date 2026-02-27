@@ -102,6 +102,8 @@
   --color-error-3:   #FFE0E0;
   --color-warning-1: #E89E1B;
   --color-warning-2: #FFEBC6;
+  --color-info-1:    #1447E6;
+  --color-info-2:    #DBEAFE;
 }
 
 *,
