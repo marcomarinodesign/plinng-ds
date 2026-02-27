@@ -1,0 +1,86 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Get started" />
+
+# Bienvenido a Plinng Design System
+
+Componentes y tokens de diseño para construir interfaces consistentes.
+
+Plinng DS es un design system construido con React, Tailwind CSS y TypeScript.
+Incluye componentes accesibles, variantes configurables y documentación automática.
+Sigue esta guía para integrarlo en tu proyecto en pocos minutos.
+
+## Instalación
+
+Instala el paquete como dependencia de tu proyecto. Si usas un monorepo, añade `plinng-ds` como workspace dependency:
+
+```sh
+npm install plinng-ds
+```
+
+Con otros gestores de paquetes:
+
+```sh
+yarn add plinng-ds
+# o
+pnpm add plinng-ds
+```
+
+## Configuración
+
+### 1. Importar estilos
+
+Importa los estilos del design system en el punto de entrada de tu aplicación (por ejemplo, en `main.tsx` o `App.tsx`):
+
+```tsx
+import "plinng-ds/dist/index.css";
+```
+
+### 2. Usar componentes
+
+Importa los componentes que necesites:
+
+```tsx
+import { Button, Text, LinkWeb } from "plinng-ds";
+
+function MyApp() {
+  return (
+    <div>
+      <Text variant="header-h1">Título principal</Text>
+      <Button variant="primary" size="md">
+        Acción principal
+      </Button>
+      <LinkWeb href="/about" variant="secondary">
+        Saber más
+      </LinkWeb>
+    </div>
+  );
+}
+```
+
+## Componentes disponibles
+
+El design system incluye componentes base que siguen las guías de diseño de Figma:
+
+| Componente | Descripción |
+|------------|-------------|
+| **Button** | Botones para acciones principales, secundarias y terciarias |
+| **LinkWeb** | Enlaces con variantes visuales y soporte para iconos |
+| **Input** | Campos de texto para formularios |
+| **Badge** | Etiquetas y badges para estados y categorías |
+| **Text** | Componente tipográfico con 17 variantes (Hero, Header, Subhead, Body, Overline, Caption) |
+
+Cada componente documenta sus props, variantes y ejemplos en su página de Docs.
+
+## Recursos
+
+- **Figma**: Los diseños están disponibles en Figma para revisar especificaciones y variantes.
+- **Storybook**: Esta documentación se genera automáticamente con autodocs.
+- **TypeScript**: Todos los componentes están tipados para mejor DX.
+
+## Próximos pasos
+
+1. Explora los componentes en el menú lateral.
+2. Usa los controles para probar variantes en tiempo real.
+3. Revisa la tabla de API de cada componente para conocer todas las props.
+4. Consulta los diseños en Figma para implementaciones pixel-perfect.

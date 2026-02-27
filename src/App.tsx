@@ -112,7 +112,7 @@ function ColorSwatch({ name, hex }: ColorToken) {
       />
       <div>
         <Text variant="body-sm" bold className="leading-tight">{name}</Text>
-        <Text variant="caption-lg" className="text-black/40 font-mono tabular-nums">{hex}</Text>
+        <Text variant="caption" className="text-black/40 font-mono tabular-nums">{hex}</Text>
       </div>
     </div>
   );
@@ -392,8 +392,8 @@ function Sidebar({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) 
         {/* Brand */}
         <div className="px-6 py-5 border-b border-white/10 flex items-center justify-between">
           <div>
-            <Text variant="h4" as="span" className="text-primary-text">Plinng</Text>
-            <Text variant="caption-lg" as="p" className="text-white/40 mt-0.5">Design System v0.1</Text>
+            <Text variant="header-h4" as="span" className="text-primary-text">Plinng</Text>
+            <Text variant="caption" as="p" className="text-white/40 mt-0.5">Design System v0.1</Text>
           </div>
           {/* Close button — mobile only */}
           <button
@@ -460,7 +460,7 @@ function Section({
       className="flex flex-col gap-6 scroll-mt-10"
     >
       <div className="pb-5 border-b border-grey-soft">
-        <Text as="h2" variant="h2" id={`${id}-heading`}>{title}</Text>
+        <Text as="h2" variant="header-h2" id={`${id}-heading`}>{title}</Text>
         {description && (
           <Text variant="body-sm" as="p" className="text-disabled mt-1">{description}</Text>
         )}
@@ -513,7 +513,7 @@ function IconographySection() {
 
         {/* Count */}
         {query.trim() && (
-          <Text variant="caption-lg" className="text-black/40">
+          <Text variant="caption" className="text-black/40">
             {filtered.length} result{filtered.length !== 1 ? "s" : ""} for "{query.trim()}"
           </Text>
         )}
@@ -545,11 +545,11 @@ function IconographySection() {
 
         {/* Usage note */}
         <div className="rounded-lg bg-white shadow-sm p-4 border-l-2 border-secondary">
-          <Text variant="caption-lg" bold className="mb-1 block">Usage</Text>
+          <Text variant="caption" bold className="mb-1 block">Usage</Text>
           <code className="text-[12px] font-mono text-black/60 block">
             {'<Icon name="arrow-right" size={24} />'}
           </code>
-          <Text variant="caption-sm" className="text-black/40 mt-1.5 block">
+          <Text variant="caption" className="text-black/40 mt-1.5 block">
             Click any icon to copy its name to clipboard.
           </Text>
         </div>
@@ -561,21 +561,23 @@ function IconographySection() {
 // ─── App ─────────────────────────────────────────────────────────────────────
 
 const TYPE_SCALE: { variant: TextVariant; spec: string; sample: string }[] = [
-  { variant: "hero-xl",        spec: "80 Desktop / 60 Mobile · ExtraBold 800", sample: "Hero Extralarge"                                  },
-  { variant: "hero-lg",        spec: "60 Desktop / 45 Mobile · Bold 700",      sample: "Hero Large"                                       },
-  { variant: "hero-md",        spec: "48 Desktop / 36 Mobile · Bold 700",      sample: "Hero Medium"                                      },
-  { variant: "hero-sm",        spec: "34 Desktop / 30 Mobile · Bold 700",      sample: "Hero Small"                                       },
-  { variant: "h1",             spec: "30 Desktop / 28 Mobile · Bold 700",      sample: "Heading 1"                                        },
-  { variant: "h2",             spec: "28 Desktop / 26 Mobile · Bold 700",      sample: "Heading 2"                                        },
-  { variant: "h3",             spec: "24 · Bold 700",                          sample: "Heading 3"                                        },
-  { variant: "h4",             spec: "22 · Bold 700",                          sample: "Heading 4"                                        },
-  { variant: "subhead",        spec: "20 · Regular 400",                       sample: "Subheading"                                       },
-  { variant: "body-editorial", spec: "18 · Regular 400",                       sample: "The quick brown fox jumps over the lazy dog"      },
-  { variant: "body-lg",        spec: "16 · Regular 400",                       sample: "The quick brown fox jumps over the lazy dog"      },
-  { variant: "body-sm",        spec: "14 · Regular 400",                       sample: "The quick brown fox jumps over the lazy dog"      },
-  { variant: "caption-lg",     spec: "12 · Regular 400",                       sample: "Caption large"                                    },
-  { variant: "caption-sm",     spec: "11 · Regular 400",                       sample: "Caption small"                                    },
-  { variant: "overline",       spec: "12 · Bold 700 · Uppercase · ls 2px",     sample: "Overline"                                         },
+  { variant: "hero-xl",             spec: "80 Desktop / 60 Mobile · ExtraBold 800", sample: "Hero Extralarge"                             },
+  { variant: "hero-lg",             spec: "60 Desktop / 45 Mobile · Bold 700",      sample: "Hero Large"                                  },
+  { variant: "hero-md",             spec: "48 Desktop / 36 Mobile · Bold 700",      sample: "Hero Medium"                                 },
+  { variant: "hero-sm",             spec: "34 Desktop / 30 Mobile · Bold 700",      sample: "Hero Small"                                  },
+  { variant: "header-h1",           spec: "30 Desktop / 28 Mobile · Bold 700",      sample: "Header H1"                                   },
+  { variant: "header-h2",           spec: "28 Desktop / 26 Mobile · Bold 700",      sample: "Header H2"                                   },
+  { variant: "header-h3",           spec: "24 · Bold 700",                          sample: "Header H3"                                   },
+  { variant: "header-h4",           spec: "22 · Bold 700",                          sample: "Header H4"                                   },
+  { variant: "subhead",             spec: "20 · Regular 400",                       sample: "Subheading regular"                          },
+  { variant: "subhead-bold",        spec: "20 · Bold 700",                          sample: "Subheading bold"                             },
+  { variant: "body-editorial",      spec: "18 · Regular 400",                       sample: "The quick brown fox jumps over the lazy dog" },
+  { variant: "body-editorial-bold", spec: "18 · Bold 700",                          sample: "The quick brown fox jumps over the lazy dog" },
+  { variant: "body-lg",             spec: "16 · Regular 400",                       sample: "The quick brown fox jumps over the lazy dog" },
+  { variant: "body-lg-bold",        spec: "16 · Bold 700",                          sample: "The quick brown fox jumps over the lazy dog" },
+  { variant: "body-sm",             spec: "14 · Regular 400",                       sample: "The quick brown fox jumps over the lazy dog" },
+  { variant: "caption",             spec: "12 · Regular 400",                       sample: "Caption text"                                },
+  { variant: "overline",            spec: "12 · Bold 700 · Uppercase · ls 2px",     sample: "Overline"                                    },
 ];
 
 function App() {
@@ -612,8 +614,8 @@ function App() {
                 <path d="M2 4.5H16M2 9H16M2 13.5H16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
               </svg>
             </button>
-            <Text variant="h4" as="span" className="text-primary-text">Plinng</Text>
-            <Text variant="caption-lg" as="span" className="text-white/40">Design System v0.1</Text>
+            <Text variant="header-h4" as="span" className="text-primary-text">Plinng</Text>
+            <Text variant="caption" as="span" className="text-white/40">Design System v0.1</Text>
           </div>
 
           <div className="max-w-3xl px-4 sm:px-8 md:px-12 py-8 md:py-12 flex flex-col gap-12 md:gap-16">
@@ -662,7 +664,7 @@ function App() {
                     className={`flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 sm:gap-6 px-4 sm:px-6 py-4 ${i < TYPE_SCALE.length - 1 ? "border-b border-grey-soft" : ""}`}
                   >
                     <Text role="cell" variant={variant}>{sample}</Text>
-                    <Text role="cell" variant="caption-lg" as="span" className="text-disabled sm:shrink-0 tabular-nums">
+                    <Text role="cell" variant="caption" as="span" className="text-disabled sm:shrink-0 tabular-nums">
                       {spec}
                     </Text>
                   </div>
@@ -690,8 +692,8 @@ function App() {
                     />
                     <div className="flex items-baseline gap-3 min-w-0">
                       <Text variant="body-sm" bold className="shrink-0 tabular-nums">{px}px</Text>
-                      <Text variant="caption-lg" className="text-disabled/50 font-mono shrink-0">{token}</Text>
-                      <Text variant="caption-lg" className="text-disabled/40 font-mono shrink-0">{tw}</Text>
+                      <Text variant="caption" className="text-disabled/50 font-mono shrink-0">{token}</Text>
+                      <Text variant="caption" className="text-disabled/40 font-mono shrink-0">{tw}</Text>
                     </div>
                   </div>
                 ))}
@@ -715,8 +717,8 @@ function App() {
                       />
                       <div>
                         <Text variant="body-sm" bold className="leading-tight">{name}</Text>
-                        <Text variant="caption-lg" className="text-disabled/50 font-mono">{px === 9999 ? "full" : `${px}px`}</Text>
-                        <Text variant="caption-sm" className="text-disabled/40 font-mono block">{token}</Text>
+                        <Text variant="caption" className="text-disabled/50 font-mono">{px === 9999 ? "full" : `${px}px`}</Text>
+                        <Text variant="caption" className="text-disabled/40 font-mono block">{token}</Text>
                       </div>
                     </div>
                   ))}
@@ -734,7 +736,7 @@ function App() {
                       />
                       <div>
                         <Text variant="body-sm" bold className="leading-tight">{px}px</Text>
-                        <Text variant="caption-lg" className="text-disabled/50 font-mono">{token}</Text>
+                        <Text variant="caption" className="text-disabled/50 font-mono">{token}</Text>
                       </div>
                     </div>
                   ))}
@@ -759,9 +761,9 @@ function App() {
                     <div>
                       <div className="flex items-baseline gap-2">
                         <Text variant="body-sm" bold className="leading-tight">Shadow {name}</Text>
-                        <Text variant="caption-lg" className="text-disabled/50">{label}</Text>
+                        <Text variant="caption" className="text-disabled/50">{label}</Text>
                       </div>
-                      <Text variant="caption-sm" className="text-disabled/40 font-mono block mt-0.5">{token}</Text>
+                      <Text variant="caption" className="text-disabled/40 font-mono block mt-0.5">{token}</Text>
                     </div>
                   </div>
                 ))}
@@ -778,7 +780,7 @@ function App() {
                 <div className="w-full flex flex-col gap-2">
                   {BREAKPOINTS.map(({ name, token, px, note }) => (
                     <div key={name} className="flex items-center gap-3">
-                      <Text variant="caption-lg" bold className="w-8 shrink-0">{name}</Text>
+                      <Text variant="caption" bold className="w-8 shrink-0">{name}</Text>
                       <div className="flex-1 relative h-6 bg-white rounded overflow-hidden shadow-sm">
                         <div
                           className="h-full bg-secondary/60 rounded"
@@ -786,9 +788,9 @@ function App() {
                           aria-hidden="true"
                         />
                       </div>
-                      <Text variant="caption-lg" bold className="w-12 text-right shrink-0 tabular-nums font-mono">{px}px</Text>
-                      <Text variant="caption-lg" className="text-disabled/50 w-28 shrink-0 hidden sm:block">{note}</Text>
-                      <Text variant="caption-sm" className="text-disabled/40 font-mono hidden md:block">{token}</Text>
+                      <Text variant="caption" bold className="w-12 text-right shrink-0 tabular-nums font-mono">{px}px</Text>
+                      <Text variant="caption" className="text-disabled/50 w-28 shrink-0 hidden sm:block">{note}</Text>
+                      <Text variant="caption" className="text-disabled/40 font-mono hidden md:block">{token}</Text>
                     </div>
                   ))}
                 </div>
@@ -799,8 +801,8 @@ function App() {
                   {GRID_COLUMNS.map(({ cols, note }) => (
                     <div key={cols} className="flex flex-col gap-1.5">
                       <div className="flex items-center gap-2">
-                        <Text variant="caption-lg" bold>{cols} cols</Text>
-                        <Text variant="caption-lg" className="text-disabled/50">{note}</Text>
+                        <Text variant="caption" bold>{cols} cols</Text>
+                        <Text variant="caption" className="text-disabled/50">{note}</Text>
                       </div>
                       <div
                         className="grid gap-1"
