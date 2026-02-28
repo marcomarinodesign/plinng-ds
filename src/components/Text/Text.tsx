@@ -5,9 +5,9 @@ import { twMerge } from "tailwind-merge";
 export type TextVariant =
   // Hero — responsive (mobile/desktop), always bold
   | "hero-xl"              // Desktop 80px w800 · Mobile 60px w800
-  | "hero-lg"              // Desktop 60px w700 · Mobile 45px w700
-  | "hero-md"              // Desktop 48px w700 · Mobile 36px w700
-  | "hero-sm"              // Desktop 34px w700 · Mobile 30px w700
+  | "hero-lg"              // Desktop 60px w800 · Mobile 45px w800
+  | "hero-md"              // Desktop 48px w800 · Mobile 36px w800
+  | "hero-sm"              // Desktop 34px w800 · Mobile 30px w800
   // Header — responsive (mobile/desktop), always bold, confirmed ✓
   | "header-h1"            // Desktop 30px · Mobile 28px
   | "header-h2"            // Desktop 28px · Mobile 26px
@@ -52,13 +52,13 @@ const defaultElement: Record<TextVariant, ElementType> = {
   "caption":             "span",
 };
 
-// Base classes — mobile-first, desktop via md: prefix. Values confirmed from Figma ✓
+// Base classes — mobile-first, desktop via md: prefix. Hero values from Figma Typography (node 145:443) ✓
 const variantClasses: Record<TextVariant, string> = {
-  // Hero — tracking-tight, responsive
+  // Hero — Inter Extra Bold 800, kern -2. Desktop: XL 80/90, L 60/70, M 48/58, S 34/44. Mobile: XL 60/70, L 45/55, M 36/46, S 30/36
   "hero-xl":             "text-[60px] leading-[70px] tracking-[-1.2px]  font-extrabold md:text-[80px] md:leading-[90px]  md:tracking-[-1.6px]",
-  "hero-lg":             "text-[45px] leading-[55px] tracking-[-0.9px]  font-bold      md:text-[60px] md:leading-[70px]  md:tracking-[-1.2px]",
-  "hero-md":             "text-[36px] leading-[46px] tracking-[-0.72px] font-bold      md:text-[48px] md:leading-[58px]  md:tracking-[-0.96px]",
-  "hero-sm":             "text-[30px] leading-[40px] tracking-[-0.6px]  font-bold      md:text-[34px] md:leading-[44px]  md:tracking-[-0.68px]",
+  "hero-lg":             "text-[45px] leading-[55px] tracking-[-0.9px]  font-extrabold md:text-[60px] md:leading-[70px]  md:tracking-[-1.2px]",
+  "hero-md":             "text-[36px] leading-[46px] tracking-[-0.72px] font-extrabold md:text-[48px] md:leading-[58px]  md:tracking-[-0.96px]",
+  "hero-sm":             "text-[30px] leading-[36px] tracking-[-0.6px]  font-extrabold md:text-[34px] md:leading-[44px]  md:tracking-[-0.68px]",
   // Header — confirmed ✓, responsive for h1/h2
   "header-h1":           "text-[28px] leading-[34px] font-bold md:text-[30px] md:leading-[36px]",
   "header-h2":           "text-[26px] leading-[32px] font-bold md:text-[28px] md:leading-[34px]",

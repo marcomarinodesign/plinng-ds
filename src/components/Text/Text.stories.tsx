@@ -33,6 +33,12 @@ const meta = {
   args: {
     children: "The quick brown fox jumps over the lazy dog",
   },
+  parameters: {
+    design: {
+      type: "figma",
+      url: "https://www.figma.com/design/wVzc4wbNrfKR9awe8UU401/Design-System?node-id=145-443",
+    },
+  },
 } satisfies Meta<typeof Text>;
 
 export default meta;
@@ -137,9 +143,9 @@ export const Caption: Story = {
 
 const allVariants: { variant: TextVariant; label: string; sample: string }[] = [
   { variant: "hero-xl",             label: "Hero / Extralarge        · 80 Desktop / 60 Mobile · ExtraBold 800 · lh90 · ls-2", sample: "Hero Extralarge" },
-  { variant: "hero-lg",             label: "Hero / Large             · 60 Desktop / 45 Mobile · Bold 700      · lh70 · ls-2", sample: "Hero Large" },
-  { variant: "hero-md",             label: "Hero / Medium            · 48 Desktop / 36 Mobile · Bold 700      · lh58 · ls-2", sample: "Hero Medium" },
-  { variant: "hero-sm",             label: "Hero / Small             · 34 Desktop / 30 Mobile · Bold 700      · lh44 · ls-2", sample: "Hero Small" },
+  { variant: "hero-lg",             label: "Hero / Large             · 60 Desktop / 45 Mobile · ExtraBold 800 · lh70 · ls-2", sample: "Hero Large" },
+  { variant: "hero-md",             label: "Hero / Medium            · 48 Desktop / 36 Mobile · ExtraBold 800 · lh58 · ls-2", sample: "Hero Medium" },
+  { variant: "hero-sm",             label: "Hero / Small             · 34 Desktop / 30 Mobile · ExtraBold 800 · lh44 · ls-2", sample: "Hero Small" },
   { variant: "header-h1",           label: "Header / H1              · 30 Desktop / 28 Mobile · Bold 700      · lh36", sample: "Header H1" },
   { variant: "header-h2",           label: "Header / H2              · 28 Desktop / 26 Mobile · Bold 700      · lh34", sample: "Header H2" },
   { variant: "header-h3",           label: "Header / H3              · 24 · Bold 700           · lh28", sample: "Header H3" },
