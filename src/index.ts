@@ -8,3 +8,5 @@ export { Badge } from "./components/Badge";
 export type { BadgeProps } from "./components/Badge";
 export { Text } from "./components/Text";
 export type { TextProps, TextVariant } from "./components/Text";
+export { Icon } from "./components/Icon";
+export type { IconProps, IconName } from "./components/Icon";
