@@ -2,6 +2,7 @@
   "name": "plinng-ds",
   "version": "0.1.0",
   "type": "module",
+  "private": false,
   "description": "Plinng Design System — React component library built with Tailwind CSS v4 and TypeScript",
   "keywords": [
     "design-system",
@@ -38,7 +39,9 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "figma:connect": "figma connect publish",
+    "figma:connect:unpublish": "figma connect unpublish"
   },
   "peerDependencies": {
     "lucide-react": ">=0.300.0",

@@ -16,6 +16,7 @@ export default defineConfig({
         "src/test/**",
         "src/**/*.stories.tsx",
         "src/**/*.test.tsx",
+        "src/**/*.figma.tsx",
       ],
       tsconfigPath: "./tsconfig.app.json",
     }),
