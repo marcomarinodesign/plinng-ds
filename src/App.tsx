@@ -5,6 +5,11 @@ import { Input } from "./components/Input";
 import { Badge } from "./components/Badge";
 import { Text, type TextVariant } from "./components/Text";
 import { Icon, type IconName } from "./components/Icon";
+import { Select } from "./components/Select";
+import { Checkbox } from "./components/Checkbox";
+import { Radio, RadioGroup } from "./components/Radio";
+import { Toast } from "./components/Toast";
+import { Modal } from "./components/Modal";
 
 // ─── Icons ───────────────────────────────────────────────────────────────────
 
@@ -39,10 +44,15 @@ const NAV = [
   {
     group: "Components",
     items: [
-      { label: "Button",  href: "#button"  },
-      { label: "Badge",   href: "#badge"   },
-      { label: "Input",   href: "#input"   },
-      { label: "LinkWeb", href: "#linkweb" },
+      { label: "Button",   href: "#button"   },
+      { label: "Badge",    href: "#badge"    },
+      { label: "Input",    href: "#input"    },
+      { label: "Select",   href: "#select"   },
+      { label: "Checkbox", href: "#checkbox" },
+      { label: "Radio",    href: "#radio"    },
+      { label: "Toast",    href: "#toast"    },
+      { label: "Modal",    href: "#modal"    },
+      { label: "LinkWeb",  href: "#linkweb"  },
     ],
   },
 ];
@@ -580,6 +590,119 @@ const TYPE_SCALE: { variant: TextVariant; spec: string; sample: string }[] = [
   { variant: "overline",            spec: "12 · Bold 700 · Uppercase · ls 2px",     sample: "Overline"                                    },
 ];
 
+// ─── Toast demo section ───────────────────────────────────────────────────────
+
+function ToastSection() {
+  const [toasts, setToasts] = useState<{ id: number; variant: "default" | "success" | "error" | "warning" | "info"; title: string; description: string }[]>([]);
+  const nextId = () => Date.now();
+
+  const show = (variant: "default" | "success" | "error" | "warning" | "info", title: string, description: string) => {
+    const id = nextId();
+    setToasts((prev) => [...prev, { id, variant, title, description }]);
+    setTimeout(() => setToasts((prev) => prev.filter((t) => t.id !== id)), 4000);
+  };
+
+  return (
+    <Section
+      id="toast"
+      title="Toast"
+      description="Transient notifications with 5 variants and auto-dismiss. Click the buttons to trigger live toasts."
+    >
+      <SubSection label="Trigger">
+        <div className="flex flex-wrap gap-2">
+          <Button size="sm" variant="secondary" onClick={() => show("default",  "Notification",         "Something you should know.")}>Default</Button>
+          <Button size="sm" variant="secondary" onClick={() => show("success",  "Changes saved",        "Your profile was updated successfully.")}>Success</Button>
+          <Button size="sm" variant="secondary" onClick={() => show("error",    "Something went wrong", "We couldn't process your request.")}>Error</Button>
+          <Button size="sm" variant="secondary" onClick={() => show("warning",  "Action required",      "Your session is about to expire.")}>Warning</Button>
+          <Button size="sm" variant="secondary" onClick={() => show("info",     "New update available", "Version 2.0 is ready to install.")}>Info</Button>
+        </div>
+      </SubSection>
+
+      <SubSection label="Static preview">
+        <div className="flex flex-col gap-3 max-w-sm">
+          <Toast variant="default" title="Notification"         description="Something you should know." closable={false} />
+          <Toast variant="success" title="Changes saved"        description="Your profile was updated successfully." closable={false} />
+          <Toast variant="error"   title="Something went wrong" description="We couldn't process your request." closable={false} />
+          <Toast variant="warning" title="Action required"      description="Your session is about to expire." closable={false} />
+          <Toast variant="info"    title="New update available" description="Version 2.0 is ready to install." closable={false} />
+        </div>
+      </SubSection>
+
+      {/* Live toast stack */}
+      <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-3 pointer-events-none">
+        {toasts.map((t) => (
+          <div key={t.id} className="pointer-events-auto">
+            <Toast
+              variant={t.variant}
+              title={t.title}
+              description={t.description}
+              closable
+              onClose={() => setToasts((prev) => prev.filter((x) => x.id !== t.id))}
+            />
+          </div>
+        ))}
+      </div>
+    </Section>
+  );
+}
+
+// ─── Modal demo section ───────────────────────────────────────────────────────
+
+function ModalSection() {
+  const [open, setOpen]   = useState<string | null>(null);
+
+  return (
+    <Section
+      id="modal"
+      title="Modal"
+      description="Dialog with focus trap, Escape/backdrop close, 5 sizes, and header/body/footer slots."
+    >
+      <SubSection label="Sizes">
+        <div className="flex flex-wrap gap-2">
+          {(["sm", "md", "lg", "xl"] as const).map((size) => (
+            <Button key={size} size="sm" variant="secondary" onClick={() => setOpen(size)}>
+              {size.toUpperCase()}
+            </Button>
+          ))}
+        </div>
+        <Modal
+          open={!!open}
+          onClose={() => setOpen(null)}
+          size={(open as "sm" | "md" | "lg" | "xl") ?? "md"}
+          title="Modal title"
+          description="This is an optional description to give the user some context."
+          footer={
+            <>
+              <Button variant="secondary" onClick={() => setOpen(null)}>Cancel</Button>
+              <Button onClick={() => setOpen(null)}>Confirm</Button>
+            </>
+          }
+        >
+          <p>
+            This is the modal body content. You can place forms, summaries, images,
+            or any custom layout here. The body scrolls independently when the
+            content exceeds the available height.
+          </p>
+        </Modal>
+      </SubSection>
+
+      <SubSection label="No close on backdrop">
+        <Button size="sm" variant="secondary" onClick={() => setOpen("sticky")}>Open sticky modal</Button>
+        <Modal
+          open={open === "sticky"}
+          onClose={() => setOpen(null)}
+          closeOnBackdrop={false}
+          title="Sticky modal"
+          description="Click the × button or press Escape to close."
+          footer={<Button onClick={() => setOpen(null)}>Got it</Button>}
+        >
+          <p>Clicking the backdrop won't close this modal.</p>
+        </Modal>
+      </SubSection>
+    </Section>
+  );
+}
+
 function App() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -939,6 +1062,92 @@ function App() {
 
             {/* ── Iconography ── */}
             <IconographySection />
+
+            {/* ── Select ── */}
+            <Section
+              id="select"
+              title="Select"
+              description="Dropdown menu with label, hint, error states, sizes, and placeholder."
+            >
+              <SubSection label="States">
+                <Select label="Default"   placeholder="Choose an option..." options={[{ value: "a", label: "Option A" }, { value: "b", label: "Option B" }, { value: "c", label: "Option C" }]} />
+                <Select label="With hint" hint="Pick one of the options." placeholder="Choose..." options={[{ value: "a", label: "Option A" }, { value: "b", label: "Option B" }]} />
+                <Select label="Error"     error="This field is required." placeholder="Choose..." options={[{ value: "a", label: "Option A" }]} />
+                <Select label="Disabled"  disabled placeholder="Choose..." options={[{ value: "a", label: "Option A" }]} />
+              </SubSection>
+              <SubSection label="Sizes">
+                <Select size="lg" label="Large"  placeholder="Large..."  options={[{ value: "a", label: "Option A" }, { value: "b", label: "Option B" }]} />
+                <Select size="md" label="Medium" placeholder="Medium..." options={[{ value: "a", label: "Option A" }, { value: "b", label: "Option B" }]} />
+                <Select size="sm" label="Small"  placeholder="Small..."  options={[{ value: "a", label: "Option A" }, { value: "b", label: "Option B" }]} />
+              </SubSection>
+              <SubSection label="Block">
+                <Select block label="Full width" placeholder="Choose an option..." options={[{ value: "a", label: "Option A" }, { value: "b", label: "Option B" }, { value: "c", label: "Option C" }]} />
+              </SubSection>
+            </Section>
+
+            {/* ── Checkbox ── */}
+            <Section
+              id="checkbox"
+              title="Checkbox"
+              description="Checkboxes with label, hint, error, and indeterminate state."
+            >
+              <SubSection label="States">
+                <Checkbox label="Unchecked" />
+                <Checkbox label="Checked" defaultChecked />
+                <Checkbox label="Indeterminate" indeterminate />
+                <Checkbox label="Disabled" disabled />
+                <Checkbox label="Disabled checked" disabled defaultChecked />
+              </SubSection>
+              <SubSection label="With hint &amp; error">
+                <Checkbox label="With hint"  hint="Optional helper text." />
+                <Checkbox label="With error" error="You must accept the terms." />
+              </SubSection>
+            </Section>
+
+            {/* ── Radio ── */}
+            <Section
+              id="radio"
+              title="Radio"
+              description="Radio buttons and RadioGroup with controlled value and direction."
+            >
+              <SubSection label="Individual">
+                <Radio label="Option A" name="r-demo" defaultChecked />
+                <Radio label="Option B" name="r-demo" />
+                <Radio label="Disabled" name="r-demo" disabled />
+              </SubSection>
+              <SubSection label="RadioGroup — vertical">
+                <RadioGroup
+                  name="rg-v"
+                  label="Preferred plan"
+                  hint="You can change this later."
+                  options={[
+                    { value: "free",    label: "Free — $0/mo"    },
+                    { value: "pro",     label: "Pro — $12/mo"    },
+                    { value: "team",    label: "Team — $49/mo"   },
+                    { value: "enterprise", label: "Enterprise", disabled: true },
+                  ]}
+                />
+              </SubSection>
+              <SubSection label="RadioGroup — horizontal">
+                <RadioGroup
+                  name="rg-h"
+                  label="Size"
+                  direction="horizontal"
+                  options={[
+                    { value: "s",  label: "S"  },
+                    { value: "m",  label: "M"  },
+                    { value: "l",  label: "L"  },
+                    { value: "xl", label: "XL" },
+                  ]}
+                />
+              </SubSection>
+            </Section>
+
+            {/* ── Toast ── */}
+            <ToastSection />
+
+            {/* ── Modal ── */}
+            <ModalSection />
 
             {/* ── LinkWeb ── */}
             <Section
