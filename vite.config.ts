@@ -10,10 +10,18 @@ export default defineConfig({
     react(),
     dts({
       include: ["src"],
-      exclude: ["src/**/*.stories.tsx", "src/**/*.test.tsx"],
+      exclude: [
+        "src/main.tsx",
+        "src/App.tsx",
+        "src/test/**",
+        "src/**/*.stories.tsx",
+        "src/**/*.test.tsx",
+      ],
       tsconfigPath: "./tsconfig.app.json",
     }),
   ],
+  // No copiar public/ al dist en modo librería (vite.svg no va al paquete npm)
+  publicDir: false,
   build: {
     lib: {
       entry: resolve(__dirname, "src/index.ts"),
@@ -39,6 +47,6 @@ export default defineConfig({
       },
     },
     sourcemap: true,
-    emptyOutDir: false,
+    emptyOutDir: true,
   },
 });
